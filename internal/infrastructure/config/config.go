@@ -87,7 +87,6 @@ func ParseDataWithOrWithoutFormat(data []byte, format string) (*Config, error) {
 	default:
 		return nil, fmt.Errorf("invalid format: %s, must be 'json' or 'yaml'", format)
 	}
-	fmt.Println(cfg)
 
 	return cfg, nil
 }
@@ -97,7 +96,6 @@ func LoadConfig(args []string, isSTDIN bool, format string) (*Config, error) {
 	var err error
 
 	if isSTDIN {
-		fmt.Println("ParseData")
 		data, err := io.ReadAll(os.Stdin)
 		if err != nil {
 			return nil, fmt.Errorf("failed to read stdin: %w", err)
@@ -107,7 +105,6 @@ func LoadConfig(args []string, isSTDIN bool, format string) (*Config, error) {
 			return nil, fmt.Errorf("failed to parse config from stdin: %w", err)
 		}
 	} else {
-		fmt.Println("Load")
 		if len(args) == 0 {
 			return nil, fmt.Errorf("usage: config-analyzer [file]")
 		}
