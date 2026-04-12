@@ -1,0 +1,20 @@
+{
+  "version": "2.2",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8443
+  },
+  "auth": {
+    "password": "Str0ng!P@ssw0rd#2024"
+  },
+  "log": {
+    "output": "/var/log/app.log",
+    "level": "info"
+  },
+  "tls": {
+    "enabled": true
+  },
+  "storage": {
+    "digest-algorithm": "sha256"
+  }
+}

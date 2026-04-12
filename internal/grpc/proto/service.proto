@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package analyzer;
+
+option go_package = "config-analyzer/internal/grpc/proto;proto";
+
+service AnalyzerService {
+  rpc Analyze(ConfigRequest) returns (AnalyzeResponse) {}
+}
+
+message ConfigRequest {
+  Config config = 1;
+}
+
+message Config {
+  Server server = 1;
+  Auth auth = 2;
+  Log log = 3;
+  Tls tls = 4;
+  Storage storage = 5;
+}
+
+message Server {
+  string host = 1;
+  int32 port = 2;
+}
+
+message Auth {
+  string password = 1;
+}
+
+message Log {
+  string output = 1;
+  string level = 2;
+}
+
+message Tls {
+  bool enabled = 1;
+}
+
+message Storage {
+  string digest_algorithm = 1;
+}
+
+message Issue {
+  string severity = 1;
+  string message = 2;
+  string recommendation = 3;
+  string path = 4;
+}
+
+message AnalyzeResponse {
+  Status status = 1;
+  repeated Issue issues = 2;
+  string error_message = 3;
+}
+
+enum Status {
+  unknown = 0;
+  clean = 1;
+  issues = 2;
+  error = 3;
+}

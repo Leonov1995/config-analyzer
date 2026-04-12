@@ -1,0 +1,36 @@
+# ═══════════════════════════════════════════════════════════
+# Примеры REST-запросов (curl)
+# ═══════════════════════════════════════════════════════════
+
+# 1. Запуск сервера
+./bin/config-analyzer serve-http --addr :8080
+
+# 2. «Плохая» конфигурация — ожидайте несколько HIGH проблем
+curl -s -X POST http://localhost:8080/analyze \
+  -H "Content-Type: application/json" \
+  -d @configs/bad_config.json | jq -C
+
+# 3. «Хорошая» конфигурация — проблем нет
+curl -s -X POST http://localhost:8080/analyze \
+  -H "Content-Type: application/json" \
+  -d @configs/good_config.json | jq -C
+
+# 4. YAML через REST (укажите Content-Type)
+curl -s -X POST http://localhost:8080/analyze \
+  -H "Content-Type: application/yaml" \
+  --data-binary @configs/bad_config.yaml | jq -C
+
+# 5. Частичная конфигурация
+curl -s -X POST http://localhost:8080/analyze \
+  -H "Content-Type: application/json" \
+  -d @configs/partial_config.json | jq -C
+
+# 6. Пустая конфигурация
+curl -s -X POST http://localhost:8080/analyze \
+  -H "Content-Type: application/json" \
+  -d @configs/empty.json | jq -C
+
+# 7. Инлайн JSON
+curl -s -X POST http://localhost:8080/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"server":{"host":"0.0.0.0","port":8080},"tls":{"enabled":false},"auth":{"password":"123"}}' | jq -C

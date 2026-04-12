@@ -1,0 +1,42 @@
+# ═══════════════════════════════════════════════════════════
+# Примеры gRPC-запросов (grpcurl)
+# ═══════════════════════════════════════════════════════════
+
+# 1. Запуск сервера
+./bin/config-analyzer serve-grpc --addr :50051
+
+# 2. «Чистая» конфигурация — проблем нет
+grpcurl -plaintext \
+  -d '{
+    "config": {
+      "server": { "host": "1.0.0.0", "port": 80 },
+      "auth": { "password": "StrongPassword123!" },
+      "log": { "output": "stdout", "level": "info" },
+      "tls": { "enabled": true },
+      "storage": { "digestAlgorithm": "sha256" }
+    }
+  }' \
+  localhost:50051 analyzer.AnalyzerService/Analyze
+
+# 3. «Проблемная» конфигурация — ожидайте HIGH/MEDIUM/LOW
+grpcurl -plaintext \
+  -d '{
+    "config": {
+      "server": { "host": "0.0.0.0", "port": 80 },
+      "auth": { "password": "123" },
+      "log": { "output": "stdout", "level": "debug" },
+      "tls": { "enabled": false },
+      "storage": { "digestAlgorithm": "md5" }
+    }
+  }' \
+  localhost:50051 analyzer.AnalyzerService/Analyze
+
+# 4. Минимальная конфигурация (только сервер)
+grpcurl -plaintext \
+  -d '{"config":{"server":{"host":"0.0.0.0","port":3000}}}' \
+  localhost:50051 analyzer.AnalyzerService/Analyze
+
+# 5. Пустая конфигурация
+grpcurl -plaintext \
+  -d '{"config":{}}' \
+  localhost:50051 analyzer.AnalyzerService/Analyze
