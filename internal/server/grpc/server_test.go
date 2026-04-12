@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"config-analyzer/internal/model"
-	pb "config-analyzer/internal/grpc/proto"
+	pb "config-analyzer/internal/server/grpc/proto"
 )
 
 // ── Fake analyzer ─────────────────────────────────────────────────────

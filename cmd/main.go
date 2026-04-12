@@ -7,8 +7,8 @@ import (
 	"config-analyzer/internal/analyzer"
 	"config-analyzer/internal/cli"
 	"config-analyzer/internal/config"
-	grpcSrv "config-analyzer/internal/grpc"
-	httpSrv "config-analyzer/internal/http"
+	grpcSrv "config-analyzer/internal/server/grpc"
+	httpSrv "config-analyzer/internal/server/http"
 	"config-analyzer/internal/rule"
 	"config-analyzer/internal/service"
 )

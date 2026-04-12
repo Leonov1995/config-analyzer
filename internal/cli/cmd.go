@@ -3,12 +3,12 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
-	grpcSrv "config-analyzer/internal/grpc"
-	"config-analyzer/internal/http"
+	grpcSrv "config-analyzer/internal/server/grpc"
+	httpSrv "config-analyzer/internal/server/http"
 	"config-analyzer/internal/service"
 )
 
-func NewRootCmd(svc *service.Service, httpServer *http.Server, grpcServer *grpcSrv.Server) *cobra.Command {
+func NewRootCmd(svc *service.Service, httpServer *httpSrv.Server, grpcServer *grpcSrv.Server) *cobra.Command {
 	rootCmd := &cobra.Command{
 		Use:   "config-analyzer",
 		Short: "Analyzes YAML/JSON configuration files for security issues",
@@ -55,7 +55,7 @@ Examples:
 	return cmd
 }
 
-func newServeHTTPCmd(httpServer *http.Server) *cobra.Command {
+func newServeHTTPCmd(httpServer *httpSrv.Server) *cobra.Command {
 	var addr string
 
 	cmd := &cobra.Command{

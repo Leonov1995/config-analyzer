@@ -180,10 +180,10 @@ go test ./internal/rule/ -v
 go test ./internal/config/ -v
 
 # HTTP-обработчик
-go test ./internal/http/ -v
+go test ./internal/server/http/ -v
 
 # gRPC-сервер
-go test ./internal/grpc/ -v
+go test ./internal/server/grpc/ -v
 
 # Анализатор
 go test ./internal/analyzer/ -v
@@ -207,10 +207,10 @@ cmd/                              # Точка входа — один бина�
 │   ├── config/                   # Загрузчик JSON/YAML (без Viper)
 │   ├── service/                  # Бизнес-логика: параллельный анализ, сбор файлов
 │   ├── server/                   # Общие утилиты: graceful shutdown, сигналы
-│   ├── cli/                      # Cobra CLI команды
-│   ├── http/                     # REST-обработчик + сервер
-│   └── grpc/                     # gRPC-сервер
-│       └── proto/                # Protobuf-определения
+│   │   ├── http/                 # REST-обработчик + сервер
+│   │   └── grpc/                 # gRPC-сервер
+│   │       └── proto/            # Protobuf-определения
+│   └── cli/                      # Cobra CLI команды
 ├── configs/                      # Примеры конфигураций и запросов
 ├── Makefile
 └── README.md

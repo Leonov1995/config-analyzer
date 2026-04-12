@@ -9,7 +9,7 @@ import (
 	"config-analyzer/internal/config"
 	"config-analyzer/internal/model"
 
-	pb "config-analyzer/internal/grpc/proto"
+	pb "config-analyzer/internal/server/grpc/proto"
 )
 
 // ── Fake analyzer for testing ─────────────────────────────────────────

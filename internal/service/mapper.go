@@ -4,7 +4,7 @@ import (
 	"config-analyzer/internal/model"
 	"errors"
 
-	pb "config-analyzer/internal/grpc/proto"
+	pb "config-analyzer/internal/server/grpc/proto"
 )
 
 func ProtoToConfig(pbCfg *pb.Config) (*model.Config, error) {

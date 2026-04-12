@@ -10,7 +10,7 @@ import (
 
 	"config-analyzer/internal/service"
 	"config-analyzer/internal/server"
-	pb "config-analyzer/internal/grpc/proto"
+	pb "config-analyzer/internal/server/grpc/proto"
 )
 
 type Server struct {
